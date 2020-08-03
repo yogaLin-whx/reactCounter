@@ -29,6 +29,14 @@ class CounterGroup extends React.Component{
         }))
     }
 
+    handleDelete = (deleteCount) =>{
+        console.log(deleteCount);
+        console.log("total:" + this.state.totalNumber);
+        this.setState((prevState) => ({
+            totalNumber: prevState.totalNumber + deleteCount/2
+        }))
+    }
+
 
 
     render(){
@@ -45,7 +53,8 @@ class CounterGroup extends React.Component{
                 Total Number: {this.state.totalNumber}
             </div>
             {
-                initArrays.map(key => <Counter  groupSize={this.state.size}  OnIncrease={this.handleIncrease}  OnDecrease={this.handleDecrease}  key={key}/>)
+                initArrays.map(key => <Counter  groupSize={this.state.size} 
+                     OnIncrease={this.handleIncrease}  OnDecrease={this.handleDecrease}   OnDelete={this.handleDelete}  key={key}/>)
             }
             </div>;
     }
