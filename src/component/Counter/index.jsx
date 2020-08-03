@@ -31,6 +31,20 @@ class Counter extends React.Component{
         )
     }
 
+
+    static getDerivedStateFromProps(props, state) {
+
+        if(props.groupSize !== state.size){
+            this.setState = () =>({
+                value:0
+            });
+        }
+         return {
+          user: props.user
+         };
+    }
+
+
 }
 
 export default Counter;
