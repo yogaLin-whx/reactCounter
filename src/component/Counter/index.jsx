@@ -4,7 +4,7 @@ class Counter extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {value:0};
+        this.state = {value:0,groupSize:0};
     }
 
     OnIncrease = () =>{
@@ -33,15 +33,13 @@ class Counter extends React.Component{
 
 
     static getDerivedStateFromProps(props, state) {
-
-        if(props.groupSize !== state.size){
-            this.setState = () =>({
-                value:0
-            });
+        if(props.groupSize !== state.groupSize){
+            return {
+                value:0,
+                groupSize:props.groupSize
+            };
         }
-         return {
-          user: props.user
-         };
+         return null;
     }
 
 
