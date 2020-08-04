@@ -21,9 +21,9 @@ class Counter extends React.Component{
         this.props.OnDecrease();
     }
 
-    OnDelete = () =>{
-        this.props.handleDelete(this.state.value);
-    }
+    // OnDelete = () =>{
+    //     this.props.handleDelete(this.state.value);
+    // }
 
 
     render(){
@@ -39,8 +39,9 @@ class Counter extends React.Component{
     static getDerivedStateFromProps(props, state) {
         if(props.groupSize !== state.groupSize){
             console.log("child");
-            props.OnDelete(state.value);
+            // props.OnDelete(state.value);
             return {
+                value:0,
                 groupSize:props.groupSize
             };
         }

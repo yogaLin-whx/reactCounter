@@ -1,5 +1,7 @@
 import React  from  "react";
 import Counter from '../Counter';
+import {INCREASE,DECREASE} from '../Action/index'
+import { connect } from "react-redux";
 
 class CounterGroup extends React.Component{
 
@@ -13,29 +15,18 @@ class CounterGroup extends React.Component{
             size:event.target.value ? parseInt(event.target.value):0,
             totalNumber:0
         });
-        
+       this.props.handleResize()
     }
 
-    handleIncrease = () =>{
-        this.setState((prevState) =>({
-            totalNumber: prevState.totalNumber + 1
-        }))
-    }
+  
 
-
-    handleDecrease = () =>{
-        this.setState((prevState) =>({
-            totalNumber: prevState.totalNumber - 1
-        }))
-    }
-
-    handleDelete = (deleteCount) =>{
-        console.log(deleteCount);
-        console.log("total:" + this.state.totalNumber);
-        this.setState((prevState) => ({
-            totalNumber: prevState.totalNumber + deleteCount/2
-        }))
-    }
+    // handleDelete = (deleteCount) =>{
+    //     console.log(deleteCount);
+    //     console.log("total:" + this.state.totalNumber);
+    //     this.setState((prevState) => ({
+    //         totalNumber: prevState.totalNumber + deleteCount/2
+    //     }))
+    // }
 
 
 
@@ -50,15 +41,25 @@ class CounterGroup extends React.Component{
                 </label>
             </div>
             <div>
-                Total Number: {this.state.totalNumber}
+                Total Number: {this.props.total}
             </div>
             {
                 initArrays.map(key => <Counter  groupSize={this.state.size} 
-                     OnIncrease={this.handleIncrease}  OnDecrease={this.handleDecrease}   OnDelete={this.handleDelete}  key={key}/>)
+                     OnIncrease={this.props.handleIncrease}  OnDecrease={this.props.handleDecrease}  key={key}/>)
             }
             </div>;
     }
 
 } 
 
-export default CounterGroup;
+const mapStateToProps = state => {
+    return {total: state.total}
+}
+
+const mapDispatchToProps = dispatch => ({
+    handleIncrease: () => dispatch({type:INCREASE}),
+    handleDecrease: () => dispatch({type:DECREASE}),
+    handleResize: () => dispatch({type:''})
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(CounterGroup);
