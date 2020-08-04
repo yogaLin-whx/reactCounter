@@ -2,18 +2,19 @@ import React  from  "react";
 import Counter from '../Counter';
 import {INCREASE,DECREASE} from '../Action/index'
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+
 
 class CounterGroup extends React.Component{
 
     constructor(props){
         super(props);
-        this.state = {size:0,totalNumber:0};
+        this.state = {size:0};
     }
 
     handleResize = (event) =>{
         this.setState({
-            size:event.target.value ? parseInt(event.target.value):0,
-            totalNumber:0
+            size:event.target.value ? parseInt(event.target.value):0
         });
        this.props.handleResize()
     }
@@ -51,6 +52,15 @@ class CounterGroup extends React.Component{
     }
 
 } 
+
+
+CounterGroup.propTypes = {
+    total:PropTypes.number.isRequired,
+    handleIncrease:PropTypes.func.isRequired,
+    handleDelete:PropTypes.func.isRequired,
+    handleResize:PropTypes.func
+}
+
 
 const mapStateToProps = state => {
     return {total: state.total}
